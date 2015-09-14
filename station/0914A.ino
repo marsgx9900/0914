@@ -56,12 +56,12 @@ void loop()
 
 
         //compare with customed string
-        if(!strcmp(receiveStr,"CHANNEL1"));
-        if(!strcmp(receiveStr,"CHANNEL2"));
-        if(!strcmp(receiveStr,"CHANNEL3"));
-        if(!strcmp(receiveStr,"LEFT"));
-        if(!strcmp(receiveStr,"RIGHT"));
-        if(!strcmp(receiveStr,"RESTART"));
+        if(!strcmp(reinterpret_cast<char *>(buf),"CHANNEL1"));
+        if(!strcmp(reinterpret_cast<char *>(buf),"CHANNEL2"));
+        if(!strcmp(reinterpret_cast<char *>(buf),"CHANNEL3"));
+        if(!strcmp(reinterpret_cast<char *>(buf),"LEFT"));
+        if(!strcmp(reinterpret_cast<char *>(buf),"RIGHT"));
+        if(!strcmp(reinterpret_cast<char *>(buf),"RESTART"));
 
     }
 

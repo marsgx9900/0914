@@ -1,0 +1,11 @@
+# Compiled source #
+###################
+.dll
+.exe
+.o
+.so
+*.depend
+*.layout
+bin
+obj
+build
