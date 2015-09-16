@@ -18,7 +18,6 @@ void func1();
 
 void setup()
 {
-    delay(1000);
     Serial.begin(9600);	// Debugging only
     Serial.println("Station setup finished");
 

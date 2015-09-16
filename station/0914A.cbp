@@ -658,6 +658,8 @@
 			<Option compile="1" />
 			<Option link="1" />
 		</Unit>
+		<Unit filename="SoftReset.cpp" />
+		<Unit filename="SoftReset.h" />
 		<Unit filename="VirtualStepper.cpp" />
 		<Unit filename="VirtualStepper.h" />
 		<Unit filename="VirtualWire/VirtualWire.cpp" />

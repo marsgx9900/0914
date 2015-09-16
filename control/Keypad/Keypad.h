@@ -93,6 +93,8 @@ public:
 	unsigned long holdTimer;
 
 	char getKey();
+	char getKey_custom_pressed(); //customed getKey :press
+	char getKey_custom_released(); //customed getKey :Release
 	bool getKeys();
 	KeyState getState();
 	void begin(char *userKeymap);
