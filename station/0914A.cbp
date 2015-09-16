@@ -517,6 +517,7 @@
 					<Add directory="$(ARDUINO_DIR)/libraries" />
 					<Add directory="$(ARDUINO_DIR)/hardware/arduino/variants/mega" />
 					<Add directory="VirtualWire" />
+					<Add directory="." />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -657,6 +658,8 @@
 			<Option compile="1" />
 			<Option link="1" />
 		</Unit>
+		<Unit filename="VirtualStepper.cpp" />
+		<Unit filename="VirtualStepper.h" />
 		<Unit filename="VirtualWire/VirtualWire.cpp" />
 		<Unit filename="VirtualWire/VirtualWire.h" />
 		<Unit filename="VirtualWire/util/crc16.h" />
