@@ -20,9 +20,9 @@ Keypad customKeypad = Keypad( makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS
 unsigned long endTime,startTime;
 
 /*************transmitter***************/
-const int transmit_pin = 12;
-const int receive_pin = 11;
-const int transmit_en_pin = 3;
+const int transmit_pin = 2;
+const int receive_pin = 3;
+const int transmit_en_pin = 4;
 
 byte last_press_rl;
 

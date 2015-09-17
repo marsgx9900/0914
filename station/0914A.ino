@@ -10,7 +10,9 @@ const int transmit_pin = 2;
 const int receive_pin = 3;
 const int transmit_en_pin = 4;
 int ad_convertor_pin; //A0~A2
-VirtualSteper m1(5,6,7,8),m2(9,10,11,12);
+/*ULN2803由上往下B'A'BA*/
+/*motor constructor順序:ABA'B'*/
+VirtualSteper m1(8,7,6,5),m2(12,11,10,9);
 const int limit_pin=A3;
 int previous_dir;
 
@@ -24,7 +26,7 @@ int* c_find(int*,int*,int);
 void setup()
 {
     Serial.begin(9600);	// Debugging only
-    Serial.println("Station setup finished");
+    Serial.println("Station setup!");
 
     // Initialise the IO and ISR
     vw_set_tx_pin(transmit_pin);
@@ -38,6 +40,9 @@ void setup()
     m1.setup();
     m2.setup();
 
+    pinMode(A0,INPUT);
+    pinMode(A1,INPUT);
+    pinMode(A2,INPUT);
 }
 
 void loop()
@@ -48,7 +53,6 @@ void loop()
     vw_wait_rx();
     if (vw_get_message(buf, &buflen)) // Non-blocking
     {
-
         // Message with a good checksum received, dump it.
         /*
         Serial.print("Got: ");
@@ -77,27 +81,27 @@ void loop()
         }
         if(!strcmp(reinterpret_cast<char *>(buf),"LEFT"))
         {
-            m2.rotate(-0.1);
+            m2.Rotate(-1);
             previous_dir=-1;
         }
         if(!strcmp(reinterpret_cast<char *>(buf),"RIGHT"))
         {
-            m2.rotate(0.1);
+            m2.Rotate(1);
             previous_dir=1;
         }
         if(!strcmp(reinterpret_cast<char *>(buf),"RESTART"))
         {
-            soft_restart();
+            //soft_restart();
         }
         if(!strcmp(reinterpret_cast<char *>(buf),""))
         {
-            if(previous_dir=-1)
+            if(previous_dir==-1)
             {
-                m2.rotate(-0.1);
+                m2.Rotate(-1);
             }
             else
             {
-                m2.rotate(0.1);
+                m2.Rotate(1);
             }
         }
     }
@@ -106,12 +110,12 @@ void loop()
 
 void func1()
 {
-    /*rotate to one side*/
-    if(analogRead(limit_pin)<100)
+    /*Rotate to one side*/
+    while(analogRead(limit_pin)>100)
     {
-        m1.rotate(0.1);
+        m1.Rotate(-0.1);
     }
-    /*rotate by 180 degree ,and recode ad value every 1 degree*/
+    /*Rotate by 180 degree ,and recode ad value every 1 degree*/
     int ad_value_array[181];
     int i;
     for(i=0; i<180; i++)
@@ -120,7 +124,7 @@ void func1()
         Serial.print(i);
         Serial.print("=");
         Serial.println(ad_value_array[i]);
-        m1.rotate(1);
+        m1.Rotate(1);
     }
     ad_value_array[i]=analogRead(ad_convertor_pin);
     Serial.print(i);
@@ -137,12 +141,12 @@ void func1()
     Serial.print("Min:");
     Serial.println(*ad_min_value);
     Serial.println(ad_min_index-ad_value_array);
-    /*rotate to ad_max_position*/
+    /*Rotate to ad_max_position*/
     int temp;
     temp=-(180-(ad_max_index-ad_value_array));
     Serial.print("Rotate angle:");
     Serial.println(temp);
-    m1.rotate(temp);
+    m1.Rotate((float)temp);
     Serial.println("Finish");
 }
 

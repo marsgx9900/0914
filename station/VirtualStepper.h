@@ -7,13 +7,13 @@ class VirtualSteper
 {
 private:
     uint8_t vs_a_pin,vs_b_pin,vs_c_pin,vs_d_pin;
-    uint8_t vs_rotate_flag;
+    uint8_t vs_Rotate_flag;
 public:
     VirtualSteper(uint8_t s0,uint8_t s1,uint8_t s2,uint8_t s3);
     void setup();
-    void rotate(float degree);
-    void forward(uint16_t s);
-    void reverse(uint16_t s);
+    void Rotate(float degree);
+    void Forward(uint16_t s);
+    void Reverse(uint16_t s);
 };
 
 #endif // VIRTUALSTEPPER_H_INCLUDED

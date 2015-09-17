@@ -14,73 +14,73 @@ void VirtualSteper::setup()
     pinMode(vs_b_pin, OUTPUT);
     pinMode(vs_c_pin, OUTPUT);
     pinMode(vs_d_pin, OUTPUT);
-    vs_rotate_flag=0x00;
-    uint8_t newmap=vs_map[vs_rotate_flag];
+    vs_Rotate_flag=0x00;
+    uint8_t newmap=vs_map[vs_Rotate_flag];
     digitalWrite(vs_a_pin,(newmap&0x01)>0);
     digitalWrite(vs_b_pin,(newmap&0x02)>0);
     digitalWrite(vs_c_pin,(newmap&0x04)>0);
     digitalWrite(vs_d_pin,(newmap&0x08)>0);
 }
 
-void VirtualSteper::rotate(float degree)
+void VirtualSteper::Rotate(float degree)
 {
     /*Deg to step*/
-    uint16_t step=abs(degree/0.08765);
-    /*rotate by step*/
+    int step=(abs(degree/0.08765));
+    /*Rotate by step*/
     if(degree>=0)
     {
-        forward(step);
+        Forward(step);
     }
     else
     {
-        reverse(step);
+        Reverse(step);
     }
 }
 
-void VirtualSteper::forward(uint16_t s)
+void VirtualSteper::Forward(uint16_t s)
 {
     for(int i=0; i<s; i++)
     {
         /*set next step flag,
         if flag reach to limit,reset it.*/
-        if (!(vs_rotate_flag^0x07))
+        if (!(vs_Rotate_flag^0x07))
         {
-            vs_rotate_flag=0x00;
+            vs_Rotate_flag=0x00;
         }
         else
         {
-            vs_rotate_flag++;
+            vs_Rotate_flag++;
         }
         /*set pin*/
-        uint8_t newmap=vs_map[vs_rotate_flag];
+        uint8_t newmap=vs_map[vs_Rotate_flag];
         digitalWrite(vs_a_pin,(newmap&0x01)>0);
         digitalWrite(vs_b_pin,(newmap&0x02)>0);
         digitalWrite(vs_c_pin,(newmap&0x04)>0);
         digitalWrite(vs_d_pin,(newmap&0x08)>0);
-        delayMicroseconds(2000);
+        delayMicroseconds(5000);
     }
 }
 
-void VirtualSteper::reverse(uint16_t s)
+void VirtualSteper::Reverse(uint16_t s)
 {
     for(int i=0; i<s; i++)
     {
         /*set next step flag,
         if flag reach to limit,reset it.*/
-        if (!(vs_rotate_flag^0x00))
+        if (!(vs_Rotate_flag^0x00))
         {
-            vs_rotate_flag=0x07;
+            vs_Rotate_flag=0x07;
         }
         else
         {
-            vs_rotate_flag--;
+            vs_Rotate_flag--;
         }
         /*set pin*/
-        uint8_t newmap=vs_map[vs_rotate_flag];
+        uint8_t newmap=vs_map[vs_Rotate_flag];
         digitalWrite(vs_a_pin,(newmap&0x01)>0);
         digitalWrite(vs_b_pin,(newmap&0x02)>0);
         digitalWrite(vs_c_pin,(newmap&0x04)>0);
         digitalWrite(vs_d_pin,(newmap&0x08)>0);
-        delayMicroseconds(2000);
+        delayMicroseconds(5000);
     }
 }
