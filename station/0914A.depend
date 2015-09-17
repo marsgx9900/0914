@@ -54,9 +54,11 @@
 1362986950 c:\users\administrator.boss-1410041317\desktop\codeblocksarduino\arduino\hardware\arduino\variants\mega\pins_arduino.h
 	<avr/pgmspace.h>
 
-1442260609 source:c:\users\irelia\documents\github\0914\station\0914a.ino
+1442497202 source:c:\users\irelia\documents\github\0914\station\0914a.ino
 	<Arduino.h>
 	<VirtualWire.h>
+	<VirtualStepper.h>
+	<SoftReset.h>
 	<string.h>
 
 1371033102 c:\users\irelia\desktop\codeblocks\arduino\hardware\arduino\cores\arduino\arduino.h
@@ -206,5 +208,17 @@
 	<Arduino.h>
 
 1434523552 source:c:\users\administrator.boss-1410041317\documents\github\tt\station\softreset.cpp
+	<avr/wdt.h>
+
+1442418145 source:c:\users\irelia\documents\github\0914\station\softreset.cpp
+	<avr/wdt.h>
+
+1442418145 source:c:\users\irelia\documents\github\0914\station\virtualstepper.cpp
+	<VirtualStepper.h>
+
+1442418145 c:\users\irelia\documents\github\0914\station\virtualstepper.h
+	<Arduino.h>
+
+1442418145 c:\users\irelia\documents\github\0914\station\softreset.h
 	<avr/wdt.h>
 
