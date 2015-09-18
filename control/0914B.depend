@@ -186,7 +186,7 @@
 1442407275 source:c:\users\administrator.boss-1410041317\documents\github\tt\control\keypad\keypad_custom.cpp
 	<Keypad.h>
 
-1442414955 source:c:\users\administrator.boss-1410041317\documents\github\tt\control\0914b.ino
+1442593883 source:c:\users\administrator.boss-1410041317\documents\github\tt\control\0914b.ino
 	<Arduino.h>
 	<VirtualWire.h>
 	<string.h>
@@ -260,4 +260,10 @@
 
 1442418145 source:c:\users\irelia\documents\github\0914\control\keypad\keypad_custom.cpp
 	<Keypad.h>
+
+1362986950 c:\users\administrator.boss-1410041317\desktop\codeblocksarduino\arduino\hardware\arduino\variants\standard\pins_arduino.h
+	<avr/pgmspace.h>
+
+1362986950 c:\users\administrator.boss-1410041317\desktop\codeblocksarduino\arduino\hardware\arduino\variants\eightanaloginputs\pins_arduino.h
+	"../standard/pins_arduino.h"
 

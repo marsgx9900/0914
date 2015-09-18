@@ -57,7 +57,7 @@ void VirtualSteper::Forward(uint16_t s)
         digitalWrite(vs_b_pin,(newmap&0x02)>0);
         digitalWrite(vs_c_pin,(newmap&0x04)>0);
         digitalWrite(vs_d_pin,(newmap&0x08)>0);
-        delayMicroseconds(5000);
+        delayMicroseconds(3000);
     }
 }
 
@@ -81,6 +81,6 @@ void VirtualSteper::Reverse(uint16_t s)
         digitalWrite(vs_b_pin,(newmap&0x02)>0);
         digitalWrite(vs_c_pin,(newmap&0x04)>0);
         digitalWrite(vs_d_pin,(newmap&0x08)>0);
-        delayMicroseconds(5000);
+        delayMicroseconds(3000);
     }
 }

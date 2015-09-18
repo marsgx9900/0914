@@ -14,7 +14,6 @@ int ad_convertor_pin; //A0~A2
 /*motor constructor¶¶§Ç:ABA'B'*/
 VirtualSteper m1(8,7,6,5),m2(12,11,10,9);
 const int limit_pin=A3;
-int previous_dir;
 
 //function prototype
 void func1();
@@ -81,28 +80,19 @@ void loop()
         }
         if(!strcmp(reinterpret_cast<char *>(buf),"LEFT"))
         {
-            m2.Rotate(-1);
-            previous_dir=-1;
+            Serial.println("LEFT");
+            m2.Rotate(-3);
+
         }
         if(!strcmp(reinterpret_cast<char *>(buf),"RIGHT"))
         {
-            m2.Rotate(1);
-            previous_dir=1;
+            Serial.println("RIGHT");
+            m2.Rotate(3);
+
         }
         if(!strcmp(reinterpret_cast<char *>(buf),"RESTART"))
         {
             //soft_restart();
-        }
-        if(!strcmp(reinterpret_cast<char *>(buf),""))
-        {
-            if(previous_dir==-1)
-            {
-                m2.Rotate(-1);
-            }
-            else
-            {
-                m2.Rotate(1);
-            }
         }
     }
 

@@ -13,8 +13,8 @@ char hexaKeys[ROWS][COLS] =
     {'A','2','5','8'},
     {'0','1','4','7'}
 };
-byte rowPins[ROWS] = {A3, A2, A1, A0}; //connect to the row pinouts of the keypad
-byte colPins[COLS] = {A7, A6, A5, A4}; //connect to the column pinouts of the keypad
+byte rowPins[ROWS] = {7, 6, 5, 4}; //connect to the row pinouts of the keypad
+byte colPins[COLS] = {11, 10, 9, 8}; //connect to the column pinouts of the keypad
 //initialize an instance of class NewKeypad
 Keypad customKeypad = Keypad( makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS);
 unsigned long endTime,startTime;
@@ -25,7 +25,7 @@ const int receive_pin = 3;
 const int transmit_en_pin = 4;
 
 byte last_press_rl;
-
+int last_direction;
 void setup()
 {
     Serial.begin(9600);
@@ -46,7 +46,7 @@ void loop()
     char _keystate = customKeypad.getState();
     if(customKey)
     {
-
+        Serial.println(customKey);
         switch (customKey)
         {
         case 'A':
@@ -62,11 +62,13 @@ void loop()
             strcpy(msg,"LEFT");
             startTime=millis();
             last_press_rl=0x01;
+            last_direction=-1;
             break;
         case 'E':
             strcpy(msg,"RIGHT");
             startTime=millis();
             last_press_rl=0x01;
+            last_direction=1;
             break;
         case 'F':
             strcpy(msg,"RESTART");
@@ -89,7 +91,14 @@ void loop()
         endTime=millis();
         if ((endTime-startTime)>100)
         {
-            vw_send((uint8_t *)"", 1);
+            if(last_direction==-1)
+            {
+                vw_send((uint8_t *)"LEFT", 5);
+            }
+            else
+            {
+                vw_send((uint8_t *)"RIGHT", 6);
+            }
             vw_wait_tx(); // Wait until the whole message is gone
             startTime=endTime;
         }
