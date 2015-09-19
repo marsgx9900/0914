@@ -1,9 +1,9 @@
-Layout image
+ï»¿Layout image
 ----------
-* [¤WªO top.pdf]
-* [¤Uª© bottom.pdf]
+* [ä¸Šæ¿ top.pdf]
+* [ä¸‹ç‰ˆ bottom.pdf]
 
 Reference
 ----------
-* [Eagle Layout±Ğ¾Ç](http://www.makezine.com.tw/make2599131456/105)
-* [RBBB¤¸¥ó®w](http://www.moderndevice.com/downloads)
+* [Eagle Layoutæ•™å­¸](http://www.makezine.com.tw/make2599131456/105)
+* [RBBBå…ƒä»¶åº«](http://www.moderndevice.com/downloads)
