@@ -1,25 +1,34 @@
 #include <Arduino.h>
 #include <VirtualWire.h>
 #include <VirtualStepper.h>
-#include <SoftReset.h>
 #include <string.h>
-//RECEIVER
+#include <Wire.h>
+#include <SoftwareSerial.h>
+
 
 //Reference to ATmega 168/328 (Arduino function PinMapping)
 const int transmit_pin = 2;
 const int receive_pin = 3;
 const int transmit_en_pin = 4;
 int ad_convertor_pin; //A0~A2
-/*ULN2803�ѤW���UB'A'BA*/
-/*motor constructor����:ABA'B'*/
+/*ULN2803¥Ñ¤W©¹¤UB'A'BA*/
+/*motor constructor¶¶§Ç:ABA'B'*/
 VirtualSteper m1(8,7,6,5),m2(12,11,10,9);
 const int limit_pin=A3;
+
+//BT Setting
+#define MAX_BTCMDLEN 128
+SoftwareSerial BT(50,51); // RX,TX
+byte cmd[MAX_BTCMDLEN]; // received 128 bytes from an Android system
+int len = 0; // received command length
+
 
 //function prototype
 void func1();
 int* c_max(int*,int*);
 int* c_min(int*,int*);
 int* c_find(int*,int*,int);
+void usercommand(char *);
 
 
 void setup()
@@ -39,68 +48,99 @@ void setup()
     m1.setup();
     m2.setup();
 
+    //Initialize AD convertor
     pinMode(A0,INPUT);
     pinMode(A1,INPUT);
     pinMode(A2,INPUT);
+
+    //Initialize BT
+    BT.begin(19200);
+    Serial.println("BTSerial is ready!");
 }
+
 
 void loop()
 {
+    //BT VAR
+    char str[MAX_BTCMDLEN];
+    int insize, ii;
+    int tick=0;
+    //RF VAR
     uint8_t buf[VW_MAX_MESSAGE_LEN];
     uint8_t buflen = VW_MAX_MESSAGE_LEN;
 
-    vw_wait_rx();
-    if (vw_get_message(buf, &buflen)) // Non-blocking
+
+    //從藍芽讀取資料
+    while ( tick<MAX_BTCMDLEN )   //Android送過來的字元可能被切成數份
     {
-        // Message with a good checksum received, dump it.
-        /*
-        Serial.print("Got: ");
-        for (int i = 0; i < buflen; i++)
+        if ( (insize=(BT.available()))>0 )   // 讀取藍牙訊息
         {
-        Serial.print(buf[i], HEX);
-        Serial.print(' ');
+            for ( ii=0; ii<insize; ii++ )
+            {
+                cmd[(len++)%MAX_BTCMDLEN]=char(BT.read());
+            }
         }
-        Serial.println();
-        */
-        //compare with customed string
-        if(!strcmp(reinterpret_cast<char *>(buf),"CHANNEL1"))
+        else
         {
-            ad_convertor_pin=A0;
-            func1();
-        }
-        if(!strcmp(reinterpret_cast<char *>(buf),"CHANNEL2"))
-        {
-            ad_convertor_pin=A1;
-            func1();
-        }
-        if(!strcmp(reinterpret_cast<char *>(buf),"CHANNEL3"))
-        {
-            ad_convertor_pin=A2;
-            func1();
-        }
-        if(!strcmp(reinterpret_cast<char *>(buf),"LEFT"))
-        {
-            Serial.println("LEFT");
-            m2.Rotate(-3);
-
-        }
-        if(!strcmp(reinterpret_cast<char *>(buf),"RIGHT"))
-        {
-            Serial.println("RIGHT");
-            m2.Rotate(3);
-
-        }
-        if(!strcmp(reinterpret_cast<char *>(buf),"RESTART"))
-        {
-            //soft_restart();
+            tick++;
         }
     }
 
+    if ( len ) //從藍芽有收到資料
+    {
+        cmd[len]='\0';
+        sprintf(str,"%s",cmd);
+        Serial.print("Data from BT=");
+        Serial.println(str);
+        usercommand(str);
+    }
+    else if(get_vw_rx_done())  //從RF有收到資料
+    {
+        if (vw_get_message(buf, &buflen)) // Non-blocking
+        {
+            usercommand(reinterpret_cast<char *>(buf));
+        }
+    }
+    len = 0;
 }
+
+void usercommand(char * input)
+{
+    Serial.print("Usercommand data=");
+    Serial.println(input);
+    //compare with customed string
+    if(!strcmp(input,"CHANNEL1"))
+    {
+        ad_convertor_pin=A0;
+        func1();
+    }
+    if(!strcmp(input,"CHANNEL2"))
+    {
+        ad_convertor_pin=A1;
+        func1();
+    }
+    if(!strcmp(input,"CHANNEL3"))
+    {
+        ad_convertor_pin=A2;
+        func1();
+    }
+    if(!strcmp(input,"LEFT"))
+    {
+        Serial.println("LEFT");
+        m2.Rotate(-3);
+    }
+    if(!strcmp(input,"RIGHT"))
+    {
+        Serial.println("RIGHT");
+        m2.Rotate(3);
+    }
+}
+
 
 void func1()
 {
     /*Rotate to one side*/
+    Serial.println("Wait for rotating to left side...");
     while(analogRead(limit_pin)>100)
     {
         m1.Rotate(-0.1);
@@ -127,17 +167,20 @@ void func1()
     int* ad_min_index=c_find(ad_value_array,ad_value_array+181,*ad_min_value);
     Serial.print("Max:");
     Serial.println(*ad_max_value);
+    Serial.print("Index:");
     Serial.println(ad_max_index-ad_value_array);
     Serial.print("Min:");
     Serial.println(*ad_min_value);
+    Serial.print("Index:");
     Serial.println(ad_min_index-ad_value_array);
     /*Rotate to ad_max_position*/
     int temp;
     temp=-(180-(ad_max_index-ad_value_array));
     Serial.print("Rotate angle:");
     Serial.println(temp);
+    Serial.println("Please wait...");
     m1.Rotate((float)temp);
-    Serial.println("Finish");
+    Serial.println("Finish!");
 }
 
 int* c_max(int * first,int * last)
