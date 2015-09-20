@@ -19,7 +19,7 @@ RFController
 
 Cellphone Controller Software
 ----------
-* [APK]
+* [APK](APP/version1.0.0.apk)
 
 Station
 ----------
