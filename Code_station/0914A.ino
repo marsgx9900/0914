@@ -1,5 +1,4 @@
 #include <Arduino.h>
-#include <VirtualWire.h>
 #include <VirtualStepper.h>
 #include <string.h>
 #include <Wire.h>
@@ -7,18 +6,15 @@
 
 
 //Reference to ATmega 168/328 (Arduino function PinMapping)
-const int transmit_pin = 2;
-const int receive_pin = 3;
-const int transmit_en_pin = 4;
 int ad_convertor_pin; //A0~A2
 /*ULN2803¥Ñ¤W©¹¤UB'A'BA*/
 /*motor constructor¶¶§Ç:ABA'B'*/
-VirtualSteper m1(8,7,6,5),m2(12,11,10,9);
+VirtualSteper m1(9,10,11,12),m2(5,6,7,8);
 const int limit_pin=A3;
 
 //BT Setting
 #define MAX_BTCMDLEN 128
-SoftwareSerial BT(50,51); // RX,TX
+SoftwareSerial BT(2,3); // RX,TX
 byte cmd[MAX_BTCMDLEN]; // received 128 bytes from an Android system
 int len = 0; // received command length
 
@@ -35,14 +31,6 @@ void setup()
 {
     Serial.begin(9600);	// Debugging only
     Serial.println("Station setup!");
-
-    // Initialise the IO and ISR
-    vw_set_tx_pin(transmit_pin);
-    vw_set_rx_pin(receive_pin);
-    vw_set_ptt_pin(transmit_en_pin);
-    vw_set_ptt_inverted(true); // Required for DR3100
-    vw_setup(2000);	 // Bits per sec
-    vw_rx_start();       // Start the receiver PLL running
 
     //Initialize the stepper
     m1.setup();
@@ -65,10 +53,6 @@ void loop()
     char str[MAX_BTCMDLEN];
     int insize, ii;
     int tick=0;
-    //RF VAR
-    uint8_t buf[VW_MAX_MESSAGE_LEN];
-    uint8_t buflen = VW_MAX_MESSAGE_LEN;
-
 
     //從藍芽讀取資料
     while ( tick<MAX_BTCMDLEN )   //Android送過來的字元可能被切成數份
@@ -94,13 +78,7 @@ void loop()
         Serial.println(str);
         usercommand(str);
     }
-    else if(get_vw_rx_done())  //從RF有收到資料
-    {
-        if (vw_get_message(buf, &buflen)) // Non-blocking
-        {
-            usercommand(reinterpret_cast<char *>(buf));
-        }
-    }
+
     len = 0;
 }
 
