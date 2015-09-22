@@ -5,22 +5,15 @@
 
 開發軟體
 ----------
-* [Codeblocks Arduino IDE (Release 20140626)]
-* [EAGLE 7.4.0]
+* [Arduino 1.6.5] (https://www.arduino.cc/en/Main/Software)
+* [Codeblocks Arduino IDE (Release 20140626)] (http://arduinodev.com/codeblocks/)
+* [EAGLE 7.4.0] (http://www.cadsoftusa.com/)
 * [EAGLE Library-RBBB] (http://moderndevice.com/rbbb-library)
-* [MIT inventory 2]
+* [MIT inventory 2] (http://ai2.appinventor.mit.edu/)
 
 
 
-手機APP
+所需軟硬體
 ----------
-* [APK](APP/version1.0.0.apk)
-
-
-
-Station 硬體需求
-----------
-* [Bluetooth module (HC-05)]
-* [Station佈線圖] (Layout_station/schPic.png)
-* [PCB-TOP Layer] (Layout_station/top.pdf)
-* [PCB-Bottom Layer] (Layout_station/bottom.pdf)
+*使用[手機APP](APP/version1.0.0.apk)與Station上的[Bluetooth module (HC-05)]溝通
+*主體(Station)使用雙玻版，[佈線圖] (Layout_station/schPic.png)、[PCB-TOP Layer] (Layout_station/top.pdf)、 [PCB-Bottom Layer] (Layout_station/bottom.pdf)
