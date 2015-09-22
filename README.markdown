@@ -7,14 +7,20 @@
 ----------
 * [Codeblocks Arduino IDE (Release 20140626)]
 * [EAGLE 7.4.0]
+* [EAGLE Library-RBBB] (http://moderndevice.com/rbbb-library)
 * [MIT inventory 2]
-以下為所需軟硬體
 
 
-Cellphone Controller Software
+
+手機APP
 ----------
 * [APK](APP/version1.0.0.apk)
 
-Station
+
+
+Station 硬體需求
 ----------
 * [Bluetooth module (HC-05)]
+* [Station佈線圖] (Layout_station/schPic.png)
+* [PCB-TOP Layer] (Layout_station/top.pdf)
+* [PCB-Bottom Layer] (Layout_station/bottom.pdf)
