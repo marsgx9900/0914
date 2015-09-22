@@ -15,5 +15,5 @@
 
 所需軟硬體
 ----------
-*使用[手機APP](APP/version1.0.0.apk)與Station上的[Bluetooth module (HC-05)]溝通
-*主體(Station)使用雙玻版，[佈線圖] (Layout_station/schPic.png)、[PCB-TOP Layer] (Layout_station/top.pdf)、 [PCB-Bottom Layer] (Layout_station/bottom.pdf)
+* 使用[手機APP](APP/version1.0.0.apk)與Station上的[Bluetooth module (HC-05)]溝通
+* 主體(Station)使用雙玻版，[佈線圖] (Layout_station/schPic.png)、[PCB-TOP Layer] (Layout_station/top.pdf)、 [PCB-Bottom Layer] (Layout_station/bottom.pdf)
