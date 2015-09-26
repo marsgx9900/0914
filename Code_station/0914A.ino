@@ -44,6 +44,14 @@ void setup()
     //Initialize BT
     BT.begin(19200);
     Serial.println("BTSerial is ready!");
+
+    //Start Blink
+    pinMode(13,OUTPUT);
+    for (int i=1;i<=4;i++)
+    {
+        digitalWrite(13,i%2);
+        delay(100);
+    }
 }
 
 
@@ -123,6 +131,10 @@ void func1()
     {
         m1.Rotate(-0.1);
     }
+    /*Blink*/
+    digitalWrite(13,HIGH);
+    delay(100);
+    digitalWrite(13,LOW);
     /*Rotate by 180 degree ,and recode ad value every 1 degree*/
     int ad_value_array[181];
     int i;
