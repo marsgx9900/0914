@@ -1,6 +1,10 @@
+可調天線方向之雙頻中繼器
+----------
+
+
 簡介
 ----------
-本專題為可調天線方向之三頻中繼器，內部軟體如下，運用arduino與MIT inventory製作程式，結合手機APP藉以實踐改變天線方向。
+運用arduino與MIT inventory製作程式，結合手機APP藉以實踐改變天線方向。
 
 
 開發軟體
@@ -13,10 +17,31 @@
 
 
 
-所需軟硬體
+需求
 ----------
-* 12V 2A電源供應器
-* ST-30 步進馬達 X2
-* Station上ATmega328P的[程式] (Code_station/)
-* 使用[手機APP](APP/version1.0.0.apk)與Station上的[Bluetooth module (HC-05)]溝通
-* 主體(Station)使用雙玻版，[佈線圖] (Layout_station/schPic.png)、[PCB-TOP Layer] (Layout_station/top.pdf)、 [PCB-Bottom Layer] (Layout_station/bottom.pdf)
+* 主體使用雙玻版。[佈線圖] (Layout_station/schPic.png)、[PCB-TOP Layer] (Layout_station/top.pdf)、 [PCB-Bottom Layer] (Layout_station/bottom.pdf)
+	*正面
+	![main1](Pic_station/forward.jpg)
+	*反面
+	![main2](Pic_station/backward.jpg)
+	*實際運作
+	![main3](Pic_station/running.jpg)
+
+*Bluetooth module (HC-05):與手機溝通，160NTD/個
+	![bt](Pic_station/bt.jpg)
+
+*FT232 module:與PC溝通(Serial Commucation)、用來燒錄ATmega328的程式、供應5V給ATmega328，180/個
+	*正面
+	![bt1](Pic_station/ft232_1.jpg)
+	*反面
+	![bt2](Pic_station/ft232_2.jpg)
+
+* 12V 2A電源供應器:120NTD/個
+
+* ST-30 步進馬達 X2。260NTD/個；圓盤是跟實驗室借的，木板額外請人裁切
+	![motor](Pic_station/motor.jpg)
+
+* ATmega328P裡的[程式] (Code_station/)
+
+* [手機APP](APP/version1.0.0.apk):與Station上的藍芽模組溝通
+	![app](Pic_station/app.jpg)
