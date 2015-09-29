@@ -6,6 +6,7 @@
 .so
 *.depend
 *.layout
+Thumbs.db
 bin
 obj
 build
