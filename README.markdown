@@ -12,7 +12,7 @@
 * [Arduino 1.6.5] (https://www.arduino.cc/en/Main/Software)
 * [Codeblocks Arduino IDE (Release 20140626)] (http://arduinodev.com/codeblocks/)
 * [EAGLE 7.4.0] (http://www.cadsoftusa.com/)  
-  * 使用到的元件庫:[EAGLE Library-RBBB](https://moderndevice.com/RBBB.lbr.zip)、[ncue_ee](Layout\eagle-lbr\ncue_ee.lbr)
+  * 使用到的元件庫:[EAGLE Library-RBBB](https://moderndevice.com/RBBB.lbr.zip)、[ncue_ee](Layout/eagle-lbr/ncue_ee.lbr)
 * [MIT inventory 2] (http://ai2.appinventor.mit.edu/)
 
 
