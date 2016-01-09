@@ -12,10 +12,12 @@
 * [Codeblocks Arduino IDE (Release 20140626)](http://arduinodev.com/codeblocks/)
 * [EAGLE 7.4.0](http://www.cadsoftusa.com/)  
   * 使用到的元件庫:[EAGLE Library-RBBB](https://moderndevice.com/RBBB.lbr.zip)
-* [MIT inventory 2](http://ai2.appinventor.mit.edu/)
+* [MIT inventory 2](http://ai2.appinventor.mit.edu/)  
+
 ### LNA控制電路
 * [EAGLE 7.4.0](http://www.cadsoftusa.com/)  
-  * 使用到的元件庫:[自訂元件庫](https://github.com/93i7xo2/Custom-Eagle-Library)
+  * 使用到的元件庫:[自訂元件庫](https://github.com/93i7xo2/Custom-Eagle-Library)  
+
 ### LNA匹配電路
 * Ansoft_HFSS_15
 * CorelDraw
